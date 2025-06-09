@@ -96,7 +96,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
 
 ```
 
- **Nota**: Si estás usando Windows y el comando `python` no está disponible en tu terminal es decir, no está en tu PATH, se puede usar la **ruta completa** hacia el ejecutable de Python dentro de tu entorno virtual ("command": "C:/Users/TU_USUARIO/AppData/Local/Programs/Python/PythonXXX/Scripts/python.exe"). Esto ayuda a evitar errores de "comando no encontrado" al ejecutar el servidor MCP. Para saber la version de Python en la terminal corre el comando python --version
+ **Nota**: Si estás usando Windows y el comando `python` no está disponible en tu terminal es decir, no está en tu PATH, se puede usar la **ruta completa** hacia el ejecutable de Python dentro de tu entorno virtual ("command": `"C:/Users/TU_USUARIO/AppData/Local/Programs/Python/PythonXXX/Scripts/python.exe"`). Esto ayuda a evitar errores de "comando no encontrado" al ejecutar el servidor MCP. Para saber la version de Python en la terminal corre el comando `python --version`
 
 
 
