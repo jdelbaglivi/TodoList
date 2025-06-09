@@ -19,6 +19,7 @@ def get_next_id():
 
 @router.get("/", response_model=list[TodoItem], summary="Obtener todos los ítems de una lista")
 def get_items(list_id: int):
+    """Obtiene todos los ítems de una lista específica por su ID."""
     # Verificar que la lista exista
     if not any(lst["id"] == list_id for lst in fake_lists_db):
         raise HTTPException(
@@ -29,6 +30,7 @@ def get_items(list_id: int):
 
 @router.post("/", response_model=TodoItem, status_code=status.HTTP_201_CREATED, summary="Crear un nuevo ítem en la lista")
 def create_item(list_id: int, item: TodoItemCreate):
+    """Crea un nuevo ítem con su descripcion y el bool completed en una lista específica por su ID."""
     # Validar que la lista exista
     if not any(lst["id"] == list_id for lst in fake_lists_db):
         raise HTTPException(
@@ -48,13 +50,14 @@ def create_item(list_id: int, item: TodoItemCreate):
         "id": get_next_id(),
         "list_id": list_id,
         "description": description,
-        "completed": False
+        "completed": item.completed  # Usar el valor del modelo
     }
     fake_items_db.append(new_item)
     return new_item
 
 @router.put("/{item_id}", response_model=TodoItem, summary="Actualizar un ítem de la lista")
 def update_item(list_id: int, item_id: int, item_update: TodoItemUpdate):
+    """Actualiza un ítem existente en una lista específica por su ID."""
     # Verificar que la lista exista
     if not any(lst["id"] == list_id for lst in fake_lists_db):
         raise HTTPException(
@@ -76,7 +79,7 @@ def update_item(list_id: int, item_id: int, item_update: TodoItemUpdate):
             detail=f"Ítem con ID {item_id} no encontrado en la lista {list_id}"
         )
     # Validar que al menos uno de los campos a actualizar esté presente
-    update_data = item_update.dict(exclude_unset=True)
+    update_data = item_update.model_dump(exclude_unset=True)  # Cambiado de dict() a model_dump()
     if not update_data:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -100,6 +103,7 @@ def update_item(list_id: int, item_id: int, item_update: TodoItemUpdate):
 
 @router.delete("/{item_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Eliminar un ítem de la lista")
 def delete_item(list_id: int, item_id: int):
+    """Elimina un ítem existente en una lista específica por su ID."""
     # Verificar que la lista exista
     if not any(lst["id"] == list_id for lst in fake_lists_db):
         raise HTTPException(
@@ -122,6 +126,7 @@ def delete_item(list_id: int, item_id: int):
 
 @router.patch("/{item_id}/complete", response_model=TodoItem, summary="Marcar un ítem como completado")
 def complete_item(list_id: int, item_id: int):
+    """Marca un ítem existente como completado en una lista específica por su ID."""
     # Verificar que la lista exista
     if not any(lst["id"] == list_id for lst in fake_lists_db):
         raise HTTPException(
