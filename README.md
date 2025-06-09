@@ -41,7 +41,7 @@ Esto iniciará tanto el servidor API REST como el servidor MCP.
 
 ## Configuración de Claude Desktop
 
-Para usar las herramientas MCP en Claude Desktop, necesitas configurar el archivo de configuración:
+Para usar las herramientas MCP en Claude Desktop, necesitas configurar el archivo de configuración: 
 
 ### Windows
 1. Abre el archivo de configuración de Claude Desktop ubicado en:
@@ -61,6 +61,8 @@ Para usar las herramientas MCP en Claude Desktop, necesitas configurar el archiv
    ~/.config/Claude/claude_desktop_config.json
    ```
 
+**NOTA** Ve hacia Claude Desktop presiona Settings luego Developer y edit Config en caSO de que no se encuentre el archivo claude_desktop_config.json
+
 ### 2. Agregar la configuración MCP
 
 Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
@@ -75,6 +77,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
     }
   }
 }
+
 ```
 
 **Importante:** Reemplaza `/ruta/completa/a/tu/proyecto/TodoList/mcp_server.py` con la ruta real donde clonaste el repositorio.
@@ -85,14 +88,16 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
   "mcpServers": {
     "todolist": {
       "command": "python",
-      "args": ["C:\\Users\\TuUsuario\\TodoList\\mcp_server.py"],
+      "args": ["C:/Users/TuUsuario/TodoList/mcp_server.py"],
       "env": {}
     }
   }
 }
+
 ```
 
- **Nota**: Si estás usando Windows y el comando `python` no está disponible en tu terminal es decir, no está en tu PATH, se puede usar la **ruta completa** hacia el ejecutable de Python dentro de tu entorno virtual, como se muestra en el ejemplo de configuración para Windows. Esto ayuda a evitar errores de "comando no encontrado" al ejecutar el servidor MCP.
+ **Nota**: Si estás usando Windows y el comando `python` no está disponible en tu terminal es decir, no está en tu PATH, se puede usar la **ruta completa** hacia el ejecutable de Python dentro de tu entorno virtual ("command": "C:/Users/TU_USUARIO/AppData/Local/Programs/Python/PythonXXX/Scripts/python.exe"). Esto ayuda a evitar errores de "comando no encontrado" al ejecutar el servidor MCP. Para saber la version de Python en la terminal corre el comando python --version
+
 
 
 **Ejemplo para macOS/Linux:**
@@ -106,6 +111,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
     }
   }
 }
+
 ```
 
 ### 3. Reiniciar Claude Desktop
@@ -207,10 +213,6 @@ pip install -r requirements.txt
 
 ### Error: "Puerto en uso"
 Si el puerto 8000 está ocupado, modifica el puerto en `run.py`.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
 ## Soporte
 
