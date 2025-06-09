@@ -80,6 +80,6 @@ def delete_item(list_id: int, item_id: int) -> dict:
     return safe_request("DELETE", f"{API_BASE_URL}/lists/{list_id}/items/{item_id}")
 
 
-# Ejecutar el servidor (solo si se llama directamente)
+# Ejecutar el servidor
 if __name__ == "__main__":
     mcp.run()

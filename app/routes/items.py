@@ -79,7 +79,7 @@ def update_item(list_id: int, item_id: int, item_update: TodoItemUpdate):
             detail=f"Ítem con ID {item_id} no encontrado en la lista {list_id}"
         )
     # Validar que al menos uno de los campos a actualizar esté presente
-    update_data = item_update.model_dump(exclude_unset=True)  # Cambiado de dict() a model_dump()
+    update_data = item_update.model_dump(exclude_unset=True)  
     if not update_data:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
