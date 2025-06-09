@@ -72,7 +72,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
   "mcpServers": {
     "todolist": {
       "command": "python",
-      "args": ["/ruta/completa/a/tu/proyecto/TodoList/mcp_server.py"],
+      "args": ["/ruta/completa/a/tu/proyecto/TodoList/app/mcp_server.py"],
       "env": {}
     }
   }
@@ -80,7 +80,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
 
 ```
 
-**Importante:** Reemplaza `/ruta/completa/a/tu/proyecto/TodoList/mcp_server.py` con la ruta real donde clonaste el repositorio.
+**Importante:** Reemplaza `/ruta/completa/a/tu/proyecto/TodoList/app/mcp_server.py` con la ruta real donde clonaste el repositorio.
 
 **Ejemplo para Windows:**
 ```json
@@ -88,7 +88,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
   "mcpServers": {
     "todolist": {
       "command": "python",
-      "args": ["C:/Users/TuUsuario/TodoList/mcp_server.py"],
+      "args": ["C:/Users/TuUsuario/TodoList/app/mcp_server.py"],
       "env": {}
     }
   }
@@ -106,7 +106,7 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
   "mcpServers": {
     "todolist": {
       "command": "python",
-      "args": ["/home/tuusuario/TodoList/mcp_server.py"],
+      "args": ["/home/tuusuario/TodoList/app/mcp_server.py"],
       "env": {}
     }
   }
