@@ -25,47 +25,43 @@ git clone https://github.com/jdelbaglivi/TodoList.git
 cd TodoList
 ```
 
-### 2. Instalar dependencias
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Ejecutar el proyecto
+### 2. Ejecutar el proyecto
 
 ```bash
 python run.py
 ```
 
-Esto iniciará tanto el servidor API REST como el servidor MCP.
+Esto automáticamente:
+- Instalará las dependencias necesarias
+- Iniciará el servidor API REST
+- Iniciará el servidor MCP
 
 ## Configuración de Claude Desktop
 
 Para usar las herramientas MCP en Claude Desktop, necesitas configurar el archivo de configuración: 
 
-### Windows
-1. Abre el archivo de configuración de Claude Desktop ubicado en:
-   ```
-   %APPDATA%\Claude\claude_desktop_config.json
-   ```
+**NOTA:** Ve hacia Claude Desktop presiona Settings luego Developer y edit Config en caso de que no se encuentre el archivo claude_desktop_config.json
 
-### macOS
-1. Abre el archivo de configuración de Claude Desktop ubicado en:
-   ```
-   ~/Library/Application Support/Claude/claude_desktop_config.json
-   ```
+### Ubicación del archivo de configuración
 
-### Linux
-1. Abre el archivo de configuración de Claude Desktop ubicado en:
-   ```
-   ~/.config/Claude/claude_desktop_config.json
-   ```
+#### Windows
+```
+%APPDATA%\Claude\claude_desktop_config.json
+```
 
-**NOTA** Ve hacia Claude Desktop presiona Settings luego Developer y edit Config en caSO de que no se encuentre el archivo claude_desktop_config.json
+#### macOS
+```
+~/Library/Application Support/Claude/claude_desktop_config.json
+```
 
-### 2. Agregar la configuración MCP
+#### Linux
+```
+~/.config/Claude/claude_desktop_config.json
+```
 
-Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
+### Configuración MCP
+
+Agrega la siguiente configuración al archivo `claude_desktop_config.json`:
 
 ```json
 {
@@ -77,12 +73,13 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
     }
   }
 }
-
 ```
 
 **Importante:** Reemplaza `/ruta/completa/a/tu/proyecto/TodoList/app/mcp_server.py` con la ruta real donde clonaste el repositorio.
 
-**Ejemplo para Windows:**
+### Ejemplos por Sistema Operativo
+
+#### Windows:
 ```json
 {
   "mcpServers": {
@@ -93,28 +90,54 @@ Si el archivo no existe, créalo. Agrega o modifica el contenido para incluir:
     }
   }
 }
-
 ```
 
- **Nota**: Si estás usando Windows y el comando `python` no está disponible en tu terminal es decir, no está en tu PATH, se puede usar la **ruta completa** hacia el ejecutable de Python dentro de tu entorno virtual ("command": `"C:/Users/TU_USUARIO/AppData/Local/Programs/Python/PythonXXX/Scripts/python.exe"`). Esto ayuda a evitar errores de "comando no encontrado" al ejecutar el servidor MCP. Para saber la version de Python en la terminal corre el comando `python --version`
-
-
-
-**Ejemplo para macOS/Linux:**
+#### macOS:
 ```json
 {
   "mcpServers": {
     "todolist": {
-      "command": "python",
+      "command": "python3",
+      "args": ["/Users/tuusuario/TodoList/app/mcp_server.py"],
+      "env": {}
+    }
+  }
+}
+```
+
+#### Linux:
+```json
+{
+  "mcpServers": {
+    "todolist": {
+      "command": "python3",
       "args": ["/home/tuusuario/TodoList/app/mcp_server.py"],
       "env": {}
     }
   }
 }
-
 ```
 
-### 3. Reiniciar Claude Desktop
+### Notas importantes por sistema:
+
+**Windows:** Si el comando `python` no está disponible en tu PATH, usa la ruta completa hacia el ejecutable:
+```json
+"command": "C:/Users/TU_USUARIO/AppData/Local/Programs/Python/PythonXXX/Scripts/python.exe"
+```
+Para verificar tu versión de Python: `python --version`
+
+**macOS:** Para encontrar la ubicación exacta de Python, ejecuta en terminal:
+```bash
+which python3
+```
+Esto te mostrará la ruta completa (ejemplo: `/usr/bin/python3` o `/opt/homebrew/bin/python3`)
+
+**Linux:** Similar a macOS, usa:
+```bash
+which python3
+```
+
+### Reiniciar Claude Desktop
 
 Después de guardar la configuración, reinicia completamente Claude Desktop para que los cambios tomen efecto.
 
@@ -203,10 +226,15 @@ Visita `http://localhost:8000/docs` en tu navegador para ver la documentación i
 ### Error: "No se puede conectar al servidor MCP"
 1. Verifica que la ruta en `claude_desktop_config.json` sea correcta
 2. Asegúrate de que Python esté en tu PATH
-3. Verifica que las dependencias estén instaladas
+3. Verifica que el archivo `mcp_server.py` exista en la ruta especificada
 4. Reinicia Claude Desktop completamente
 
+### Error: "Comando no encontrado" (Python)
+- **Windows**: Usa la ruta completa al ejecutable de Python
+- **macOS/Linux**: Usa `which python3` para encontrar la ruta correcta
+
 ### Error: "Módulo no encontrado"
+El script `run.py` instala automáticamente las dependencias, pero si tienes problemas, ejecuta manualmente:
 ```bash
 pip install -r requirements.txt
 ```
@@ -222,3 +250,4 @@ Si tienes problemas con la configuración:
 2. Revisa que las rutas en la configuración sean correctas
 3. Asegúrate de reiniciar Claude Desktop después de cambiar la configuración
 4. Consulta los logs de Claude Desktop para errores específicos
+5. Usa `which python3` (macOS/Linux) para verificar la ruta correcta de Python
